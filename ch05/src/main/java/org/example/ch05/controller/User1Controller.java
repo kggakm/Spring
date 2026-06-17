@@ -70,7 +70,7 @@ public class User1Controller {
         return "redirect:/user1/list?modify=success";
     }
 
-    @GetMapping("/user1/delete")
+    @GetMapping("/user1/remove")
     public String remove(String userid){
         System.out.println(userid);
 
