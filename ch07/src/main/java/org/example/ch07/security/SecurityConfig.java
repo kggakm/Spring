@@ -23,7 +23,7 @@ public class SecurityConfig {
         // 로그인 설정
         httpSecurity.formLogin( form -> form
                         .loginPage("/user/login")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/?login=success")
                         .failureUrl("/user/login?login=fail")
                         .usernameParameter("userid")
                         .passwordParameter("pass")
