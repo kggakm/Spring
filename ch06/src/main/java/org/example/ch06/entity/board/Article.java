@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = {"user", "commentList"})    // 해당 엔티티에서 관계 설정한 속성(엔티티)은 반드시 제외해야함, 안하면 no session 에러 발생
 @Builder
 @Entity
 @Table(name = "board_article")
@@ -27,9 +27,16 @@ public class Article {
     @JoinColumn(name = "writer")
     private User user;
 
+    /*
+        일대다관계(OneToMany)
+         - 참조타입이 List<엔티티>로 선언
+         - fetch는 LAZY로 사용, EAGER는 성능부담 발생
+         - mappedBy는 해당 엔티티(Article)와 관계가 설정되는 대상 엔티티(Comment)의 현재 엔티티 속성을 선언
+         - mappedBy는 대상 엔티티의 외래키(FK) 속성을 선언
+     */
+
     // 일대다 관계는 List 선언
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cno")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article")
     private List<Comment> commentList;
 
     @CreationTimestamp  // 해당 엔티티가 INSERT 될때 현재 날짜시간 생성

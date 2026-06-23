@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = {"article", "user"})
 @Builder
 @Entity
 @Table(name = "board_comment")
