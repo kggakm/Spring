@@ -22,24 +22,27 @@ public class SecurityConfig {
 
         // 로그인 설정
         httpSecurity.formLogin( form -> form
-                        .loginPage("")
-                        .defaultSuccessUrl("")
-                        .failureUrl("")
-                        .usernameParameter("")
-                        .passwordParameter("")
+                        .loginPage("/user/login")
+                        .defaultSuccessUrl("/")
+                        .failureUrl("/user/login?login=fail")
+                        .usernameParameter("userid")
+                        .passwordParameter("pass")
         );
 
         // 로그아웃 설정
         httpSecurity.logout( config -> config
-                .logoutUrl("")
+                .logoutUrl("/user/logout")
                 .invalidateHttpSession(true)
-                .logoutSuccessUrl("")
+                .logoutSuccessUrl("/user/login?logout=success")
         );
 
         // 인가 설정
+        /*
         httpSecurity.authorizeHttpRequests( authorize -> authorize
                 .requestMatchers("/").permitAll()   // 루트(/) 경로는 인증 없이 모든 요청 허용
         );
+        */
+
 
         // 기타 보안 설정
         httpSecurity.csrf(CsrfConfigurer::disable);
